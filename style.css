@@ -1,0 +1,64 @@
+body{
+background-image: url("/img/fondo.png");
+
+}
+.imagen{
+    max-width:100%;
+}
+
+a{
+    cursor:pointer;
+}
+.alerta{
+    font-weight:700;
+}
+
+.modal-contenedor{
+    display:flex;
+    align-items: center;
+    gap:2rem;
+    color: whitesmoke;
+    font-weight: bold;    
+    
+}
+.img-carrito{
+    width:250px;
+    height: max-content;
+    padding: 20px;
+} 
+.modal-content{
+    background-color: rgba(5, 5, 5, 0.945);
+}
+.parrafo{
+    font-weight: 900;
+    font-style: italic;
+}
+#precioTotal{
+    margin:0;
+    padding:0;
+    color: aliceblue;
+}
+a{
+    text-decoration: none;
+}
+.boton{
+    opacity:0;
+}
+
+#text{
+    color: black;
+}
+
+#compra{
+    margin-top: 100px;
+    background-color: rgb(83, 83, 83);
+    border-radius: 5px;
+    border-color: whitesmoke;
+    border-style: solid;
+}
+
+.texto{
+
+    color: black;
+    font-weight: 900;
+}
