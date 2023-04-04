@@ -92,6 +92,7 @@ function agregarProductos(id) {
   nombreProd = Productos[index].nombre
 
   if (carrito.length == 0) {
+    Productos[index].cantidad = 1
     carrito.push(Productos[index])
     console.table(carrito)
   } else if (carrito.length != "") {
@@ -100,11 +101,12 @@ function agregarProductos(id) {
 
       let newArray = carrito.map((producto) => producto.nombre).indexOf(nombreProd)
       carrito[newArray].cantidad += 1
-      console.table(carrito)
-     } //else {
-    //   carrito.push(Productos[index])
-    //   console.table(carrito)
-    // }
+      console.log(carrito[newArray].cantidad)
+      
+     } else {
+      carrito.push(Productos[index])
+      console.table(Productos[index])
+    }
 
   }
   mostrarCarrito()
@@ -185,11 +187,14 @@ function eliminarProducto(id) {
 
 //=================FUNCION PARA EL BOTON DE VACIAR CARRO=========================
 function vaciarCarro() {
-
-  carrito.length = [];
+  localStorage.clear;
+  carrito = [];
   mostrarCarrito();
   console.table(carrito)
-
+  
+  
+  let cart = document.getElementById("carritoContenedor");
+  cart.innerText = cantidadCarrito();
 }
 
 //=================OBTIENE LOS DATOS DEL STORAGE=========================
