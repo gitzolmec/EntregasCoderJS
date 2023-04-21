@@ -62,3 +62,83 @@ a{
     color: black;
     font-weight: 900;
 }
+
+/*********************************************************************************/
+
+
+
+#myModal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal-content1 {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    
+  }
+  
+  .close {
+    
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    width: 7%;
+    text-align: center;
+    border-style: solid;
+    border: 5px;
+    border-color: black;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    
+   
+  }
+
+  #btn-close:hover{
+    background-color: red;
+  }
+
+  #textoinfo{
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+  }
+
+  #texto{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+  }
+
+  #precioInfo{
+    margin-top: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+  }
+  .d-flex{
+    margin-top: 30px;
+    justify-content: space-between;
+  }
+
+  .img-info{
+    cursor: pointer;
+  }

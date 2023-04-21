@@ -10,22 +10,28 @@ let totalProceso
 let formulario
 let cantidadCarro = 0
 let totalCompra = 0
+let productImg
+let modal
+let btn
+let span
+let nombreCliente 
+let mailCliente 
 
 
 
 const Productos = [
-  { id: 1, nombre: "Animal Crossing", cantidad: 1, precio: 1200, img: "img/animalCrossing.jpeg", },
-  { id: 2, nombre: "Ark Evolve", cantidad: 1, precio: 1200, img: "img/arkEvolve.jpg", },
-  { id: 3, nombre: "Mario Party Super Stars", cantidad: 1, precio: 1200, img: "img/supermarioparty.jpg", },
-  { id: 4, nombre: "Crash Bandicoot Trilogy", cantidad: 1, precio: 1200, img: "img/crash.png", },
-  { id: 5, nombre: "Bayonetta", cantidad: 1, precio: 1200, img: "img/bayonetta.png", },
-  { id: 6, nombre: "Asassins Creed 3", cantidad: 1, precio: 1200, img: "img/assassins creed 3.jpg", },
-  { id: 7, nombre: "Crash Bandicoot 4", cantidad: 1, precio: 1200, img: "img/crash 4.jpg", },
-  { id: 8, nombre: "DMC 5 Special Edition", cantidad: 1, precio: 1200, img: "img/Devil May Cry 5.jpeg", },
-  { id: 9, nombre: "Elden Ring", cantidad: 1, precio: 1200, img: "img/eldenRing.jpg", },
-  { id: 10, nombre: "Hogwarts Legacy", cantidad: 1, precio: 1200, img: "img/hogwartslegacy.jpg", },
-  { id: 11, nombre: "Horizon Forbidden West", cantidad: 1, precio: 1200, img: "img/horizon.jpg", },
-  { id: 12, nombre: "Call of Duty MW II", cantidad: 1, precio: 1200, img: "img/callofdutymw3.jpg", },
+  { id: 1, nombre: "Animal Crossing", cantidad: 1, precio: 36000, img: "img/animalCrossing.jpeg", },
+  { id: 2, nombre: "Ark Evolve", cantidad: 1, precio: 25990, img: "img/arkEvolve.jpg", },
+  { id: 3, nombre: "Mario Party Super Stars", cantidad: 1, precio: 47000, img: "img/supermarioparty.jpg", },
+  { id: 4, nombre: "Crash Bandicoot Trilogy", cantidad: 1, precio: 42000, img: "img/crash.png", },
+  { id: 5, nombre: "Bayonetta", cantidad: 1, precio: 25000, img: "img/bayonetta.png", },
+  { id: 6, nombre: "Asassins Creed 3", cantidad: 1, precio: 35000, img: "img/assassins creed 3.jpg", },
+  { id: 7, nombre: "Crash Bandicoot 4", cantidad: 1, precio: 40000, img: "img/crash 4.jpg", },
+  { id: 8, nombre: "DMC 5 Special Edition", cantidad: 1, precio: 25000, img: "img/Devil May Cry 5.jpeg", },
+  { id: 9, nombre: "Elden Ring", cantidad: 1, precio: 54000, img: "img/eldenRing.jpg", },
+  { id: 10, nombre: "Hogwarts Legacy", cantidad: 1, precio: 54000, img: "img/hogwartslegacy.jpg", },
+  { id: 11, nombre: "Horizon Forbidden West", cantidad: 1, precio: 48000, img: "img/horizon.jpg", },
+  { id: 12, nombre: "Call of Duty MW II", cantidad: 1, precio: 35000, img: "img/callofdutymw3.jpg", },
 ];
 
 let carrito = [];
@@ -41,6 +47,10 @@ function inicializarVariables() {
     procesarCompra = document.getElementById("procesarCompra");
     totalProceso = document.getElementById("totalProceso");
     formulario = document.querySelector('#procesar-pago');
+  
+
+
+
     finalizarCompra.onclick = comprar;
 
   } catch (error) {
@@ -57,6 +67,71 @@ function inicializarVariables() {
 }
 
 
+function cerrarModalInfo() {
+  let xmodal = document.getElementById("myModal");
+  xmodal.style.display = "none";
+
+}
+
+
+
+
+
+
+
+// Cuando el usuario hace clic en la imagen del producto, mostrar la información en el modal desde el archivo index.json
+function mostrarInformacion(ID) {
+  let productInfo = document.getElementById("product-info");
+  modal = document.getElementById("myModal");
+  modal.style.display = "block";
+
+  fetch('index.json')
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      let html = '';
+
+
+      html += `
+          
+          <button type="button" class="close" id="btn-close" data-bs-dismiss="modal" onclick="cerrarModalInfo()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="card mt-3 mx-2" style="width: 500px;">
+          <img src="${Productos[ID - 1].img}" id="img-info">
+          <br>
+          <p id="textoinfo">${data[ID - 1].nombre} </p>
+          <p id="texto" >${data[ID - 1].Descripcion}</p>
+         
+          </div>
+          <div class="card-body">
+          <p class="card-text" id="precioInfo">Precio: $${Productos[ID - 1].precio}</p>         
+          <div class="d-flex"> 
+              <button class="btn btn-primary" id="modalAdd" onclick="agregarProductos(${data[ID - 1].id})">Comprar Producto</button>
+              <button class="btn btn-danger" id="modalAdd" onclick="eliminarProducto(${data[ID - 1].id})">Eliminar Producto</button>
+          </div>
+      </div>
+      
+          `
+
+
+
+      productInfo.innerHTML = html;
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+
+  
+ 
+}
+
+
+
+
 //=========================FUNCION QUE PINTA LOS PRODUCTOS EN EL INDEX===========================
 
 
@@ -68,7 +143,7 @@ function pintarProductos() {
       column.id = `columna-${Productos.id}`;
       contenedor.innerHTML += `
     <div class="card mt-3 mx-2" style="width: 18rem;">
-      <img class="card-img-top mt-2" src="${producto.img}" alt="Card image cap">
+      <img class="card-img-top mt-2 img-info" id="product-image-${producto.id}" onclick="mostrarInformacion(${producto.id})" src="${producto.img}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title" id="text">${producto.nombre}</h5>
           <p class="card-text" id="text">Precio: ${producto.precio}</p>
@@ -102,8 +177,8 @@ function agregarProductos(id) {
       let newArray = carrito.map((producto) => producto.nombre).indexOf(nombreProd)
       carrito[newArray].cantidad += 1
       console.log(carrito[newArray].cantidad)
-      
-     } else {
+
+    } else {
       carrito.push(Productos[index])
       console.table(Productos[index])
     }
@@ -191,8 +266,8 @@ function vaciarCarro() {
   carrito = [];
   mostrarCarrito();
   console.table(carrito)
-  
-  
+
+
   let cart = document.getElementById("carritoContenedor");
   cart.innerText = cantidadCarrito();
 }
@@ -256,14 +331,26 @@ function procesarPedido() {
 
     }
   } catch (error) { }
-if(totalProceso){
-  totalProceso.innerText = `TOTAL: ${totalCompra}`;
-  console.log(totalCompra)
-}
+  if (totalProceso) {
+    totalProceso.innerText = `TOTAL: ${totalCompra}`;
+    console.log(totalCompra)
+  }
 }
 
 function comprar() {
 
+  nombreCliente = document.getElementById("cliente");
+  mailCliente = document.getElementById("email.id");
+  console.log(nombreCliente)
+  if (nombreCliente.value === '' || mailCliente==='') {
+    Swal.fire({
+      title: "Faltan Datos",
+      text: "completa toda tu informacion",
+      icon: "error",
+      timer: 3000,
+    });
+   
+  }else{
   Swal.fire({
     title: "¡Compra Existosa!",
     text: "su compra a sido realizada con exito",
@@ -279,7 +366,21 @@ function comprar() {
   }, 3000)
 
 }
+}
 
+
+//===============================cierra el modal de informaciond el juego al hacer click fuera de el modal=======
+function cerrarModal(event) {
+  const modal = document.getElementById('myModal');
+  if (event.target === modal) modal.style.display = 'none';
+}
+
+function configurarModal() {
+  const modal = document.getElementById('myModal');
+  document.addEventListener('click', cerrarModal);
+}
+
+configurarModal();
 
 
 
