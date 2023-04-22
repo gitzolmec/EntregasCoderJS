@@ -10,10 +10,7 @@ let totalProceso
 let formulario
 let cantidadCarro = 0
 let totalCompra = 0
-let productImg
 let modal
-let btn
-let span
 let nombreCliente 
 let mailCliente 
 
@@ -74,12 +71,8 @@ function cerrarModalInfo() {
 }
 
 
-
-
-
-
-
 // Cuando el usuario hace clic en la imagen del producto, mostrar la información en el modal desde el archivo index.json
+
 function mostrarInformacion(ID) {
   let productInfo = document.getElementById("product-info");
   modal = document.getElementById("myModal");
@@ -98,8 +91,8 @@ function mostrarInformacion(ID) {
           <button type="button" class="close" id="btn-close" data-bs-dismiss="modal" onclick="cerrarModalInfo()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
-          <div class="card mt-3 mx-2" style="width: 500px;">
-          <img src="${Productos[ID - 1].img}" id="img-info">
+          <div class="card mt-3 mx-2" style="max-width: 500px;">
+          <img class="img-fluid" src="${Productos[ID - 1].img}" id="img-info">
           <br>
           <p id="textoinfo">${data[ID - 1].nombre} </p>
           <p id="texto" >${data[ID - 1].Descripcion}</p>
@@ -118,15 +111,12 @@ function mostrarInformacion(ID) {
 
 
       productInfo.innerHTML = html;
-      console.log(data);
+      console.log(html);
     })
     .catch((error) => {
       console.log(error);
     });
-
-
   
- 
 }
 
 
