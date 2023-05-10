@@ -1,34 +1,106 @@
 //====================VARIABLES Y ARRAY DE PRODUCTOS====================================
 
-let contenedor
-let carritoContenedor
-let vaciarCarrito
-let precioTotal
-let finalizarCompra
-let procesarCompra
-let totalProceso
-let formulario
-let cantidadCarro = 0
-let totalCompra = 0
-let modal
-let nombreCliente 
-let mailCliente 
-
-
+let contenedor;
+let carritoContenedor;
+let vaciarCarrito;
+let precioTotal;
+let finalizarCompra;
+let procesarCompra;
+let totalProceso;
+let formulario;
+let cantidadCarro = 0;
+let totalCompra = 0;
+let modal;
+let nombreCliente;
+let mailCliente;
+let gradient = "linear-gradient(to right, #21d466, #5ee7ff)";
+let gradientEliminar = "red";
 
 const Productos = [
-  { id: 1, nombre: "Animal Crossing", cantidad: 1, precio: 36000, img: "img/animalCrossing.jpeg", },
-  { id: 2, nombre: "Ark Evolve", cantidad: 1, precio: 25990, img: "img/arkEvolve.jpg", },
-  { id: 3, nombre: "Mario Party Super Stars", cantidad: 1, precio: 47000, img: "img/supermarioparty.jpg", },
-  { id: 4, nombre: "Crash Bandicoot Trilogy", cantidad: 1, precio: 42000, img: "img/crash.png", },
-  { id: 5, nombre: "Bayonetta", cantidad: 1, precio: 25000, img: "img/bayonetta.png", },
-  { id: 6, nombre: "Asassins Creed 3", cantidad: 1, precio: 35000, img: "img/assassins creed 3.jpg", },
-  { id: 7, nombre: "Crash Bandicoot 4", cantidad: 1, precio: 40000, img: "img/crash 4.jpg", },
-  { id: 8, nombre: "DMC 5 Special Edition", cantidad: 1, precio: 25000, img: "img/Devil May Cry 5.jpeg", },
-  { id: 9, nombre: "Elden Ring", cantidad: 1, precio: 54000, img: "img/eldenRing.jpg", },
-  { id: 10, nombre: "Hogwarts Legacy", cantidad: 1, precio: 54000, img: "img/hogwartslegacy.jpg", },
-  { id: 11, nombre: "Horizon Forbidden West", cantidad: 1, precio: 48000, img: "img/horizon.jpg", },
-  { id: 12, nombre: "Call of Duty MW II", cantidad: 1, precio: 35000, img: "img/callofdutymw3.jpg", },
+  {
+    id: 1,
+    nombre: "Animal Crossing",
+    cantidad: 1,
+    precio: 36000,
+    img: "img/animalCrossing.jpeg",
+  },
+  {
+    id: 2,
+    nombre: "Ark Evolve",
+    cantidad: 1,
+    precio: 25990,
+    img: "img/arkEvolve.jpg",
+  },
+  {
+    id: 3,
+    nombre: "Mario Party Super Stars",
+    cantidad: 1,
+    precio: 47000,
+    img: "img/supermarioparty.jpg",
+  },
+  {
+    id: 4,
+    nombre: "Crash Bandicoot Trilogy",
+    cantidad: 1,
+    precio: 42000,
+    img: "img/crash.png",
+  },
+  {
+    id: 5,
+    nombre: "Bayonetta",
+    cantidad: 1,
+    precio: 25000,
+    img: "img/bayonetta.png",
+  },
+  {
+    id: 6,
+    nombre: "Asassins Creed 3",
+    cantidad: 1,
+    precio: 35000,
+    img: "img/assassins creed 3.jpg",
+  },
+  {
+    id: 7,
+    nombre: "Crash Bandicoot 4",
+    cantidad: 1,
+    precio: 40000,
+    img: "img/crash 4.jpg",
+  },
+  {
+    id: 8,
+    nombre: "DMC 5 Special Edition",
+    cantidad: 1,
+    precio: 25000,
+    img: "img/Devil May Cry 5.jpeg",
+  },
+  {
+    id: 9,
+    nombre: "Elden Ring",
+    cantidad: 1,
+    precio: 54000,
+    img: "img/eldenRing.jpg",
+  },
+  {
+    id: 10,
+    nombre: "Hogwarts Legacy",
+    cantidad: 1,
+    precio: 54000,
+    img: "img/hogwartslegacy.jpg",
+  },
+  {
+    id: 11,
+    nombre: "Horizon Forbidden West",
+    cantidad: 1,
+    precio: 48000,
+    img: "img/horizon.jpg",
+  },
+  {
+    id: 12,
+    nombre: "Call of Duty MW II",
+    cantidad: 1,
+    precio: 35000,
+    img: "img/callofdutymw3.jpg",
+  },
 ];
 
 let carrito = [];
@@ -40,22 +112,15 @@ function inicializarVariables() {
     contenedor = document.getElementById("contenedor");
     vaciarCarrito = document.getElementById("vaciarCarrito");
     precioTotal = document.querySelector("#precioTotal");
-    finalizarCompra = document.getElementById("finalizarCompra")
+    finalizarCompra = document.getElementById("finalizarCompra");
     procesarCompra = document.getElementById("procesarCompra");
     totalProceso = document.getElementById("totalProceso");
-    formulario = document.querySelector('#procesar-pago');
-  
-
-
+    formulario = document.querySelector("#procesar-pago");
 
     finalizarCompra.onclick = comprar;
-
-  } catch (error) {
-
-  }
+  } catch (error) {}
   if (procesarCompra) {
     procesarCompra.onclick = realizarCompra;
-
   }
 
   if (vaciarCarrito) {
@@ -63,13 +128,10 @@ function inicializarVariables() {
   }
 }
 
-
 function cerrarModalInfo() {
   let xmodal = document.getElementById("myModal");
   xmodal.style.display = "none";
-
 }
-
 
 // Cuando el usuario hace clic en la imagen del producto, mostrar la información en el modal desde el archivo index.json
 
@@ -78,13 +140,12 @@ function mostrarInformacion(ID) {
   modal = document.getElementById("myModal");
   modal.style.display = "block";
 
-  fetch('index.json')
+  fetch("index.json")
     .then((res) => {
       return res.json();
     })
     .then((data) => {
-      let html = '';
-
+      let html = "";
 
       html += `
           
@@ -99,31 +160,29 @@ function mostrarInformacion(ID) {
          
           </div>
           <div class="card-body">
-          <p class="card-text" id="precioInfo">Precio: $${Productos[ID - 1].precio}</p>         
+          <p class="card-text" id="precioInfo">Precio: $${
+            Productos[ID - 1].precio
+          }</p>         
           <div class="d-flex"> 
-              <button class="btn btn-primary" id="modalAdd" onclick="agregarProductos(${data[ID - 1].id})">Comprar Producto</button>
-              <button class="btn btn-danger" id="modalAdd" onclick="eliminarProducto(${data[ID - 1].id})">Eliminar Producto</button>
+              <button class="btn btn-primary" id="modalAdd" onclick="agregarProductos(${
+                data[ID - 1].id
+              })">Comprar Producto</button>
+              <button class="btn btn-danger" id="modalAdd" onclick="eliminarProducto(${
+                data[ID - 1].id
+              })">Eliminar Producto</button>
           </div>
       </div>
       
-          `
-
-
-
+          `;
       productInfo.innerHTML = html;
       console.log(html);
     })
     .catch((error) => {
       console.log(error);
     });
-  
 }
 
-
-
-
 //=========================FUNCION QUE PINTA LOS PRODUCTOS EN EL INDEX===========================
-
 
 function pintarProductos() {
   try {
@@ -142,57 +201,64 @@ function pintarProductos() {
         </div>
     </div>
     `;
-
-    })
-  } catch (error) { }
-
+    });
+  } catch (error) {}
 }
-
 
 //===============================FUNCION QUE AGREGA LOS PRODUCTOS AL CARRO=====================
 
 function agregarProductos(id) {
-
   let index = Productos.findIndex((Productos) => Number(Productos.id) == id);
-  nombreProd = Productos[index].nombre
+  nombreProd = Productos[index].nombre;
 
   if (carrito.length == 0) {
-    Productos[index].cantidad = 1
-    carrito.push(Productos[index])
-    console.table(carrito)
+    Productos[index].cantidad = 1;
+    carrito.push(Productos[index]);
+    console.table(carrito);
   } else if (carrito.length != "") {
-    let prodID = carrito.some((valor) => valor.id === id)
+    let prodID = carrito.some((valor) => valor.id === id);
     if (prodID) {
-
-      let newArray = carrito.map((producto) => producto.nombre).indexOf(nombreProd)
-      carrito[newArray].cantidad += 1
-      console.log(carrito[newArray].cantidad)
-
+      let newArray = carrito
+        .map((producto) => producto.nombre)
+        .indexOf(nombreProd);
+      carrito[newArray].cantidad += 1;
+      console.log(carrito[newArray].cantidad);
     } else {
-      carrito.push(Productos[index])
-      console.table(Productos[index])
+      carrito.push(Productos[index]);
+      console.table(Productos[index]);
     }
-
   }
-  mostrarCarrito()
-}
+  mostrarCarrito();
 
+  Toastify({
+    text: "Producto agregado",
+    duration: 3000,
+    newWindow: true,
+    close: true,
+    gravity: "bottom",
+    position: "right",
+    stopOnFocus: true,
+    style: {
+      background: gradient,
+      fontWeight: "bold",
+      border: "3px solid green",
+    },
+    onClick: function () {},
+  }).showToast();
+}
 
 //=================================FUNCION QUE CALCULA LA CANTIDAD TOTAL DE PRODUCTOS===========================
 
-
 function cantidadCarrito() {
-  cantidadCarro = 0
+  cantidadCarro = 0;
   carrito.forEach((carro) => {
     cantidadCarro += carro.cantidad;
-
-  })
-  return cantidadCarro
+  });
+  return cantidadCarro;
 }
 
 //============================================FUNCION QUE PINTA LOS PRODUCTOS AGREGADOS EN EL CARRITO EN EL MODAL==========
 function mostrarCarrito() {
-
   let cart = document.getElementById("carritoContenedor");
   cart.innerText = cantidadCarrito();
 
@@ -219,20 +285,18 @@ function mostrarCarrito() {
   }
 
   if (carrito.length === 0) {
-
     modalBody.innerHTML += `
     <p class="text-center text-primary parrafo">¡Aun no agregaste nada!</p>
     `;
   }
   if (precioTotal) {
-    precioTotal.innerText = ("$ " + carrito.reduce(
-      (acc, prod) => acc + prod.cantidad * prod.precio,
-      0)
-    )
+    precioTotal.innerText =
+      "$ " +
+      carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0);
   }
 
   guardarStorage();
-};
+}
 
 //=================FUNCION PARA GUARDAR EN EL LOCAL STORAGE=========================
 function guardarStorage() {
@@ -242,12 +306,28 @@ function guardarStorage() {
 //=================FUNCION PARA ELIMINAR PRODUCTOS DEL CARRO=========================
 function eliminarProducto(id) {
   let index = carrito.findIndex((carrito) => Number(carrito.id) == id);
-  carrito[index].cantidad -= 1
+  carrito[index].cantidad -= 1;
   carrito = carrito.filter((juego) => juego.cantidad > 0);
   mostrarCarrito();
-  console.table(carrito)
+  console.table(carrito);
   let cart = document.getElementById("carritoContenedor");
   cart.innerText = cantidadCarrito();
+
+  Toastify({
+    text: "Producto eliminado",
+    duration: 3000,
+    newWindow: true,
+    close: true,
+    gravity: "top",
+    position: "right",
+    stopOnFocus: true,
+    style: {
+      background: gradientEliminar,
+      fontWeight: "bold",
+      border: "3px solid green",
+    },
+    onClick: function () {},
+  }).showToast();
 }
 
 //=================FUNCION PARA EL BOTON DE VACIAR CARRO=========================
@@ -255,8 +335,7 @@ function vaciarCarro() {
   localStorage.clear;
   carrito = [];
   mostrarCarrito();
-  console.table(carrito)
-
+  console.table(carrito);
 
   let cart = document.getElementById("carritoContenedor");
   cart.innerText = cantidadCarrito();
@@ -274,9 +353,7 @@ function obtenerProductosStorage() {
   }
 }
 
-
 function realizarCompra() {
-
   if (carrito.length === 0) {
     Swal.fire({
       title: "¡Tu carrito está vacio!",
@@ -287,11 +364,10 @@ function realizarCompra() {
   } else {
     location.href = "compra.html";
   }
-
 }
 
 function procesarPedido() {
-  totalProceso = document.getElementById("totalProceso")
+  totalProceso = document.getElementById("totalProceso");
   try {
     let productosJSON = localStorage.getItem("carrito");
     if (productosJSON != null) {
@@ -315,72 +391,57 @@ function procesarPedido() {
           listaCompra.appendChild(row);
 
           totalCompra += prod.cantidad * prod.precio;
-
         }
       });
-
     }
-  } catch (error) { }
+  } catch (error) {}
   if (totalProceso) {
     totalProceso.innerText = `TOTAL: ${totalCompra}`;
-    console.log(totalCompra)
+    console.log(totalCompra);
   }
 }
 
 function comprar() {
+  nombreCliente = document.getElementById("cliente").value;
+  mailCliente = document.getElementById("email.id").value;
 
-  nombreCliente = document.getElementById("cliente");
-  mailCliente = document.getElementById("email.id");
-  console.log(nombreCliente)
-  if (nombreCliente.value === '' || mailCliente==='') {
+  if (nombreCliente.value === "" || mailCliente === "") {
     Swal.fire({
       title: "Faltan Datos",
       text: "completa toda tu informacion",
       icon: "error",
       timer: 3000,
     });
-   
-  }else{
-  Swal.fire({
-    title: "¡Compra Existosa!",
-    text: "su compra a sido realizada con exito",
-    icon: "success",
-    timer: 3000,
-  });
-  setTimeout(() => {
-    location.href = "index.html";
-    localStorage.clear();
-    carrito = [];
-    mostrarCarrito();
-
-  }, 3000)
-
+  } else {
+    Swal.fire({
+      title: `Excelente ${nombreCliente}!`,
+      text: `Su compra ha sido realizada con éxito`,
+      icon: "success",
+      timer: 3000,
+    });
+    setTimeout(() => {
+      location.href = "index.html";
+      localStorage.clear();
+      carrito = [];
+      mostrarCarrito();
+    }, 3000);
+  }
 }
-}
-
 
 //===============================cierra el modal de informaciond el juego al hacer click fuera de el modal=======
 function cerrarModal(event) {
-  const modal = document.getElementById('myModal');
-  if (event.target === modal) modal.style.display = 'none';
+  const modal = document.getElementById("myModal");
+  if (event.target === modal) modal.style.display = "none";
 }
 
 function configurarModal() {
-  const modal = document.getElementById('myModal');
-  document.addEventListener('click', cerrarModal);
+  const modal = document.getElementById("myModal");
+  document.addEventListener("click", cerrarModal);
 }
 
 configurarModal();
 
-
-
-procesarPedido()
-inicializarVariables()
-pintarProductos()
-obtenerProductosStorage()
-
-
-
-
-
-
+procesarPedido();
+inicializarVariables();
+pintarProductos();
+obtenerProductosStorage();
